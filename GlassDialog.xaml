@@ -1,0 +1,115 @@
+<Window x:Class="JianRead.GlassDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="阿利宙斯阅读"
+        Width="440"
+        SizeToContent="Height"
+        MinHeight="210"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        FontFamily="{StaticResource AppFont}"
+        PreviewKeyDown="Window_PreviewKeyDown">
+  <Window.Resources>
+    <Style x:Key="DialogButtonStyle" TargetType="Button">
+      <Setter Property="Foreground" Value="#EDE9E4" />
+      <Setter Property="Background" Value="#45413D" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="17,8" />
+      <Setter Property="MinWidth" Value="78" />
+      <Setter Property="Margin" Value="8,0,0,0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.84" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.66" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Window.Resources>
+
+  <Border x:Name="DialogSurface"
+          Margin="20"
+          Padding="24,21,24,20"
+          CornerRadius="15"
+          Background="#B8242220"
+          BorderBrush="#806E6761"
+          BorderThickness="1">
+    <Border.Effect>
+      <DropShadowEffect BlurRadius="28" ShadowDepth="7" Opacity="0.48" Color="#000000" />
+    </Border.Effect>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+
+      <Border x:Name="GlassHighlight"
+              Grid.RowSpan="4"
+              Margin="-23,-20,-23,-19"
+              CornerRadius="14"
+              BorderBrush="#30FFFFFF"
+              BorderThickness="1,1,1,0"
+              IsHitTestVisible="False" />
+
+      <Grid Grid.Row="0" MouseLeftButtonDown="Header_MouseLeftButtonDown">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="42" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Border x:Name="IconSurface" Width="34" Height="34" CornerRadius="10" Background="#403A35" VerticalAlignment="Top" HorizontalAlignment="Left">
+          <TextBlock x:Name="IconText" Text="&#xE897;" FontFamily="Segoe MDL2 Assets" FontSize="17" Foreground="#D8B99E" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+        <TextBlock x:Name="TitleText" Grid.Column="1" Text="确认操作" Foreground="#F0ECE7" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap" />
+        <Button Grid.Column="2" Content="×" Width="28" Height="28" Padding="0" Margin="0" Style="{StaticResource DialogButtonStyle}" Background="Transparent" Click="Close_Click" FontSize="18" ToolTip="关闭" />
+      </Grid>
+
+      <TextBlock x:Name="MessageText"
+                 Grid.Row="1"
+                 Text="确认继续吗？"
+                 Foreground="#CFC9C2"
+                 FontSize="13.5"
+                 LineHeight="23"
+                 TextWrapping="Wrap"
+                 Margin="42,17,4,25" />
+
+      <Border x:Name="InputSurface"
+              Grid.Row="2"
+              Margin="42,0,4,24"
+              Padding="10,7"
+              CornerRadius="8"
+              BorderThickness="1"
+              Visibility="Collapsed">
+        <TextBox x:Name="InputTextBox"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 Padding="0"
+                 FontSize="13.5"
+                 SpellCheck.IsEnabled="False" />
+      </Border>
+
+      <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button x:Name="SecondaryButton" Content="不保存" Style="{StaticResource DialogButtonStyle}" Click="Secondary_Click" />
+        <Button x:Name="CancelButton" Content="取消" Style="{StaticResource DialogButtonStyle}" Click="Cancel_Click" />
+        <Button x:Name="PrimaryButton" Content="确定" Style="{StaticResource DialogButtonStyle}" Background="#C8AD96" Foreground="#241F1B" FontWeight="SemiBold" Click="Primary_Click" />
+      </StackPanel>
+    </Grid>
+  </Border>
+</Window>

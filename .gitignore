@@ -1,0 +1,21 @@
+# .NET build output
+bin/
+obj/
+dist/
+artifacts/
+TestResults/
+
+# IDE and user settings
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
